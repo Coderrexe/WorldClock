@@ -32,7 +32,7 @@ class WorldTime {
       print("Error: $e");
       
       this.isDaytime = false;
-      this.time = "No Internet connection";
+      this.time = "No Data";
     }
   }
 }

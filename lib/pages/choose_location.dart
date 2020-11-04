@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "../services/world_time.dart";
+import "../services/locations.dart";
 
 class ChooseLocationPage extends StatefulWidget {
   @override
@@ -7,19 +8,15 @@ class ChooseLocationPage extends StatefulWidget {
 }
 
 class _ChooseLocationPageState extends State<ChooseLocationPage> {
-  List<WorldTime> locations = [
-    WorldTime(location: "London", flag: "uk.png", url: "Europe/London"),
-    WorldTime(location: "Beijing", flag: "china.png", url: "Asia/Hong_Kong"),
-    WorldTime(location: "Paris", flag: "france.png", url: "Europe/Paris"),
-    WorldTime(location: "New York", flag: "usa.png", url: "America/New_York"),
-    WorldTime(location: "Moscow", flag: "russia.jpg", url: "Europe/Moscow"),
-    WorldTime(location: "Madrid", flag: "spain.png", url: "Europe/Madrid"),
-    WorldTime(location: "Sydney", flag: "australia.png", url: "Australia/Sydney"),
-  ];
-
   void updateTime(int index) async {
-    WorldTime worldTime = this.locations[index];
+    WorldTime worldTime = locations[index];
     await worldTime.getTime();
+    Navigator.pop(context, {
+      "location": worldTime.location,
+      "flag": worldTime.flag,
+      "time": worldTime.time,
+      "isDaytime": worldTime.isDaytime,
+    });
   }
 
   @override
@@ -33,18 +30,18 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         elevation: 0,
       ),
       body: ListView.builder(
-        itemCount: this.locations.length,
+        itemCount: locations.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
             child: Card(
               child: ListTile(
                 onTap: () {
-                  print(this.locations[index].location);
+                  this.updateTime(index);
                 },
-                title: Text(this.locations[index].location),
+                title: Text(locations[index].location),
                 leading: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/flags/${this.locations[index].flag}"),
+                  backgroundImage: AssetImage("assets/images/flags/${locations[index].flag}"),
                 ),
               ),
             ),
