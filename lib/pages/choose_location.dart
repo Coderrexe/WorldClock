@@ -12,10 +12,15 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
     WorldTime(location: "Beijing", flag: "china.png", url: "Asia/Hong_Kong"),
     WorldTime(location: "Paris", flag: "france.png", url: "Europe/Paris"),
     WorldTime(location: "New York", flag: "usa.png", url: "America/New_York"),
-    // WorldTime(location: "Moscow", flag: "russia.png", url: "Europe/Moscow"),
-    // WorldTime(location: "Madrid", flag: "spain.png", url: "Europe/Madrid"),
-    // WorldTime(location: "Amsterdam", flag: "netherlands.png", url: "Europe/London"),
+    WorldTime(location: "Moscow", flag: "russia.jpg", url: "Europe/Moscow"),
+    WorldTime(location: "Madrid", flag: "spain.png", url: "Europe/Madrid"),
+    WorldTime(location: "Sydney", flag: "australia.png", url: "Australia/Sydney"),
   ];
+
+  void updateTime(int index) async {
+    WorldTime worldTime = this.locations[index];
+    await worldTime.getTime();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +33,18 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
         elevation: 0,
       ),
       body: ListView.builder(
-        itemCount: locations.length,
-        itemBuilder: (context, index) {
+        itemCount: this.locations.length,
+        itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 4.0),
             child: Card(
               child: ListTile(
                 onTap: () {
-                  print(locations[index].location);
+                  print(this.locations[index].location);
                 },
-                title: Text(locations[index].location),
+                title: Text(this.locations[index].location),
                 leading: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/flags/${locations[index].flag}"),
+                  backgroundImage: AssetImage("assets/images/flags/${this.locations[index].flag}"),
                 ),
               ),
             ),

@@ -26,10 +26,12 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(offset)));
 
       this.isDaytime = now.hour > 6 && now.hour < 18;
-      
+
       this.time = DateFormat.jm().format(now);
     } catch (e) {
       print("Error: $e");
+      
+      this.isDaytime = false;
       this.time = "No Internet connection";
     }
   }
