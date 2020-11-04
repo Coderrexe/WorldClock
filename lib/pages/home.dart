@@ -18,13 +18,13 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/$backgroundImage"),
+            image: AssetImage("assets/images/$backgroundImage"),
             fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 120.0, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 100.0, 0, 0),
             child: Column(
               children: <Widget>[
                 FlatButton.icon(
